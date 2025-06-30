@@ -16,7 +16,7 @@ const getTXTFile = asyncHandler(async (req, res) => {
                 .status(200)
                 .json(new ApiResponse(200, Summary, "Summary generated"))
         } catch (error) {
-            throw new ApiError(502, "error generating th summary in the controller")
+            throw new ApiError(502, "error generating the summary in the controller")
         }
 
     }
