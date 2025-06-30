@@ -22,6 +22,6 @@ export async function summarizeChat(chat){
         )
         return response.data.generations[0].text.trim()
     } catch (error) {
-        throw new ApiError(501, "Error while generating summary")
+        throw new ApiError(501, error || `Error while generating summary`)
     }
 }
