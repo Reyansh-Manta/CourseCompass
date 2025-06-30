@@ -1,0 +1,21 @@
+import { Summary } from "../models/summary.model.js";
+import {asyncHandler} from "../utils/asyncHandler.js"
+import {ApiError} from "../utils/ApiError.js"
+import {ApiResponse} from "../utils/ApiResponse.js"
+import fs, { readFileSync } from "fs"
+import { summarizeChat } from "../utils/summarizeChat.js";
+
+const getTXTFile = asyncHandler(async(req, res) => {
+
+    const text = req.txtContent
+
+    const Summary = summarizeChat(text)
+    
+    return res
+            .status(200)
+            .json(new ApiResponse(200,Summary,"Summary generated"))
+})
+
+export {
+    getTXTFile
+}
