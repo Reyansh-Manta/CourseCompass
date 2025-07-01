@@ -20,6 +20,7 @@ const getTXTFile = asyncHandler(async (req, res) => {
         }
 
     }
+    summaryGen()
 })
 
 

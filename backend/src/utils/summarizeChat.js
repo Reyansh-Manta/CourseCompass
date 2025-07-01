@@ -5,12 +5,12 @@ const COHERE_API_KEY = process.env.COHERE_API_KEY
 
 export async function summarizeChat(chat){
     try {
-        const response = axios.post(
+        const response = await axios.post(
             "https://api.cohere.ai/v1/generate",
             {
                 model: "command-r",
                 prompt: `Summarize the following WhatsApp group chat:\n\n${chat}`,
-                max_token: 4000,
+                max_tokens: 4000,
                 temperature: 0.3
             },
             {
