@@ -22,6 +22,7 @@ export async function summarizeChat(chat){
         )
         return response.data.generations[0].text.trim()
     } catch (error) {
+        console.error('API request failed', error.response?.data)
         throw new ApiError(501, error || `Error while generating summary`)
     }
 }
