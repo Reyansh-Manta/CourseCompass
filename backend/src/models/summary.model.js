@@ -1,10 +1,6 @@
 import mongoose, {Schema} from "mongoose"
 
 const summarySchema = new Schema({
-    title:{
-        type: String,
-        required: true
-    },
     summary:{
         type: String,
         required: true

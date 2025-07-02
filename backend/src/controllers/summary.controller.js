@@ -10,17 +10,22 @@ const getTXTFile = asyncHandler(async (req, res) => {
     const text = req.txtContent
     const summaryGen = async (req, res) => {
 
-        try {
+        try {                      
             const Summary = await summarizeChat(text)
-            return res
-                .status(200)
-                .json(new ApiResponse(200, Summary, "Summary generated"))
+            // console.log(Summary);
+            return Summary
+            
         } catch (error) {
+            console.error('API request failed in controller', error.response?.data)
             throw new ApiError(502, "error generating the summary in the controller")
         }
 
     }
-    summaryGen()
+    const finalSummary = await summaryGen()
+    
+    return res
+            .status(200)
+            .json(new ApiResponse(200, finalSummary, "Summary generated"))
 })
 
 

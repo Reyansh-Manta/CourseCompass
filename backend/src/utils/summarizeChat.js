@@ -4,14 +4,16 @@ import { ApiError } from "./ApiError.js"
 const COHERE_API_KEY = process.env.COHERE_API_KEY
 
 export async function summarizeChat(chat){
+    
     try {
         const response = await axios.post(
-            "https://api.cohere.ai/v1/generate",
+            "https://api.cohere.ai/v1/chat",
             {
-                model: "command-r",
-                prompt: `Summarize the following WhatsApp group chat:\n\n${chat}`,
-                max_tokens: 4000,
-                temperature: 0.3
+                model: "command",
+                message: `The first line of your response shold be the sentiment of this chat . The second line should tell us about the most frequent chatter and after that Summarize the following WhatsApp group chat:\n\n${chat}`,
+                max_tokens: 1000,
+                temperature: 0.3,
+                stream: false
             },
             {
                 headers: {
@@ -20,7 +22,7 @@ export async function summarizeChat(chat){
                 }
             }
         )
-        return response.data.generations[0].text.trim()
+        return response.data.text.trim()
     } catch (error) {
         console.error('API request failed', error.response?.data)
         throw new ApiError(501, error || `Error while generating summary`)
